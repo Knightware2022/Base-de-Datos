@@ -38,7 +38,7 @@ create table Puntos
 
 create table Genera
 (
-	idEncuentro int,
+	idEncuentro int unique,
     idDeporte int,
     idResultado int,
     primary key (idEncuentro,idResultado, idDeporte)
@@ -112,7 +112,7 @@ create table Forman
 create table Encuentros
 (
     idDeporte int,
-	idEncuentro int,
+	idEncuentro int unique,
     fechaComienzo datetime not null,
     fechaFinaliza datetime not null,
     descripcionEncuentro varchar(100) not null,
@@ -301,10 +301,13 @@ alter table Utiliza add CONSTRAINT `fk_utiliENCU` FOREIGN KEY (idDeporte, idEncu
 alter table Genera add CONSTRAINT `fk_generaENCU` FOREIGN KEY ( idDeporte, idEncuentro) REFERENCES `Encuentros` (idDeporte, idEncuentro) on delete cascade;
 alter table Notifica add CONSTRAINT `fk_notificaEncu` FOREIGN KEY (idDeporte, idEncuentro) REFERENCES `Encuentros` (idDeporte, idEncuentro) on delete cascade;
 alter table EquiposFavoritos add constraint fk_EquipoFavUSU foreign key (idDeporte, idEquipoFavorito) references Equipos(idDeporte, idEquipo);
-alter table Compite add constraint fk_compiteJUGAEqui foreign key (idJugador,idDeporteEquipo,idEquipo) references Forman(idJugador,idEquipo, idDeporteEquipo) ;
+alter table Compite add constraint fk_compiteJUGAEquiDepo foreign key (idJugador,idEquipo,idDeporteEquipo) references Forman(idJugador,idEquipo, idDeporteEquipo) ;
 alter table torneosTienenEncuentrosIndivi add constraint fkTorneoIndiTorn foreign key (idTorneo,idDeporteTorneo) references TorneosIndividuales (idTorneo, idDeporte);
 alter table torneosTienenEncuentrosIndivi add constraint fkTorneoIndiEncu foreign key (idDeporteEncuentro,idEncuentro,idParticipante) references Participa (idDeporteEncuentro, idEncuentro, idParticipante);
 alter table torneosTienenEncuentrosIndivi add constraint ck_TorneoIndiDeporEncuentro check(idDeporteEncuentro = idDeporteTorneo);
 alter table torneosTienenEncuentrosEquipos add constraint fkTorneoColeTorn foreign key (idTorneo, idDeporteTorneo) references TorneosColectivos (idTorneo, idDeporte);
 alter table torneosTienenEncuentrosEquipos add constraint fkTorneoColeEncu foreign key (idDeporteEncuentro, idEncuentro,idEquipo) references Compite (idDeporteEncuentro,idEncuentro, idEquipo);
 alter table Encuentros add constraint ck_Fechas check(fechaFinaliza > fechaComienzo);
+alter table Torneos add constraint ck_FechasTorn check(fechaFinalizado > fechaComienzo);
+alter table torneosTienenEncuentrosEquipos add constraint ck_DepoColecTorn check(idDeporteTorneo = idDeporteEncuentro);
+alter table torneosTienenEncuentrosIndivi add constraint ck_DepoIndiTorn check(idDeporteTorneo = idDeporteEncuentro);

@@ -14,7 +14,7 @@ insert into Encuentros(idDeporte, idEncuentro,fechaComienzo, fechaFinaliza, desc
 values
 (1, 1,'2022-05-15 15:15:00','2022-05-15 17:15:00',"Final" ),
 (1, 2,'2021-05-15 17:15:00','2021-05-15 19:15:00',"Amistoso" ),
-(2, 3,'2020-09-15 23:00:00','2020-09-15 02:15:00',"Amistoso" ),
+(2, 3,'2020-09-15 00:00:00','2020-09-15 02:15:00',"Amistoso" ),
 (3, 4,'2023-12-15 13:02:00','2023-12-15 15:02:00',"Cuartos Final"),
 (2, 5,'2021-04-15 06:27:00','2021-04-15 08:27:00',"Semi-final" ),
 (1, 6,'2022-01-15 02:12:1','2022-01-15 04:12:00', "Clasificatoria");
@@ -107,21 +107,22 @@ values
 (9,'04:17:52',60,45,'manolo'),
 (10,'14:58:2',54,17,'alberto');
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Forman(idJugador,idEquipo)/*insertar valores a la tabla forman*/
+insert into Forman(idJugador,idEquipo, idDeporteEquipo)/*insertar valores a la tabla forman*/
 values
-(9,1),
-(10,1),
-(13,1),
-(8,1),
-(14,2);
+(9,1,1),
+(10,1,1),
+(13,1,1),
+(8,1,1),
+(14,2,2),
+(2,3,1);
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Torneos(idTorneo,fechaComienzo,fechaFinalizado,nombreTorneo)/*insertar valores a la tabla torneos*/
+insert into Torneos(idDeporte,idTorneo,fechaComienzo,fechaFinalizado,nombreTorneo)/*insertar valores a la tabla torneos*/
 values
-(1,'2022-6-20','2022-6-20','speed'),
-(2,'2021-2-1','2021-8-9','redbull'),
-(3,'2020-9-9','2020-12-8','bishop'),
-(4,'1999-12-31','2000-1-1','new year walk'),
-(5,'2009-1-1','2119-12-31','jo mama');
+(1, 1,'2022-6-20 15:00:00','2022-6-21 17:00:00','Copa Libertadores de America'),
+(2, 2,'2021-2-1 14:54:00','2021-8-9 19:54:00','redbull'),
+(1, 3,'2020-9-9 17:30:00','2020-12-8 22:30:00','bishop'),
+(1, 4,'1999-12-31 04:45:00','2000-1-1 10:45:00','new year walk'),
+(3, 5,'2009-1-1 06:30:00','2119-12-31 06:30:00','jo mama');
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
 insert into Usuarios(idUsuario)/*insertar valores a la tabla ususarios padre*/ 
 values
@@ -147,48 +148,42 @@ values
 (1,1),
 (2,2);
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Visualiza(idUsuario,idEncuentro)/*insertar valores a la tabla visualiza*/
+insert into Visualiza(idUsuario,idEncuentro, idDeporte)/*insertar valores a la tabla visualiza*/
+values
+(1,1,1),
+(1,2,1),
+(2,1,1),
+(1,3,2),
+(3,1,1);
+/*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
+insert into Genera(idDeporte,idEncuentro,idResultado)  /*insertar valores a la tabla aplica*/
+values
+(1,1,1),
+(1,2,3),
+(2,3,4),
+(3,4,6),
+(2,5,7);
+/*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
+insert into Competencia_Colectiva(idDeporte, idEncuentro) /*insertar valores a la tabla competencia colectiva*/
 values
 (1,1),
 (1,2),
-(2,1),
-(1,3),
-(3,1);
+(2,3);
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Genera(idEncuentro,idResultado)  /*insertar valores a la tabla aplica*/
+insert into Competencia_Individual(idDeporte, idEncuentro) /*insertar valores a la tabla competencia individual*/ 
 values
-(1,1),
-(2,3),
 (3,4),
-(4,1),
-(5,1);
+(2,5);
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Competencia_Colectiva(idEncuentro) /*insertar valores a la tabla competencia colectiva*/
+insert into Compite(idDeporteEncuentro, idEncuentro,idEquipo, idJugador, idDeporteEquipo)/*insertar valores a la tabla compite*/
 values
-(1),
-(2),
-(3);
-insert into Competencia_Colectiva(idEncuentro) /*insertar valores a la tabla competencia colectiva*/
-values
-(7),
-(8),
-(9),
-(10),
-(11),
-(12);
-/*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Competencia_Individual(idEncuentro) /*insertar valores a la tabla competencia individual*/ 
-values
-(4),
-(5);
-/*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Compite(idDeporte, idEncuentro,idEquipo,idJugador, idDeporteEquipo)/*insertar valores a la tabla compite*/
-values
-(1, 1,1,9,1),
-(1, 1,1,10, 1),
-(1, 1,1,13, 1),
-(1, 1,1,8, 1),                
-(1, 1,2,14, 1);
+(1, 1, 1, 9,  1),
+(1, 1, 1, 10, 1),
+(1, 1, 1, 13, 1),
+(1, 1, 1, 8,  1),                
+(2, 3, 2, 14, 2),
+(1, 1, 3, 2,  1);
+
 
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
 insert into DeportesFavoritos(idUsuario,DeporteFavorito)/*insertar valores a la tabla deportes favoritos*/
@@ -199,55 +194,30 @@ values
 (4,1),
 (3,3);
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into EquiposFavoritos(idUsuario,idEquipoFavorito)/*insertar valores a la tabla deportes favoritos*/
+insert into EquiposFavoritos(idUsuario,idEquipoFavorito, idDeporte)/*insertar valores a la tabla deportes favoritos*/
 values
-(4,1),
-(3,1),
-(5,2),
-(5,1),
-(3,4),
-(3,3);
+(4,1,1),
+(3,1,1),
+(5,2,2),
+(5,1,1),
+(3,4,1),
+(3,3,1);
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
 insert into Participa(idDeporteEncuentro,idEncuentro,idParticipante, idDeporteParticipante)/*insertar valores a la tabla participa*/
 values
-(1, 4,2, 2),
-(1, 5,3, 3);
+(2, 5, 5, 2),
+(2, 5, 3, 2);
+
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Practican(idEquipo,idDeporte)/*insertar valores a la tabla practican*/
+insert into Utiliza (idAlineacion, idEncuentro, idDeporte)
 values
-(1,2),
-(3,2),
-(2,2),
-(4,3),
-(5,4),
-(6,3);
-/*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Realiza(idDeporte,idTorneo)/*insertar valores a la tabla realiza*/
-values
-(1,1),
-(1,2),
-(1,3),
-(2,1),
-(3,1),
-(5,4),
-(6,5);
-/*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Se_Especializa_En(idDeporte,idParticipante)/*insertar valores a la tabla se especializa en*/
-values
-(1,1),
-(1,5),
-(1,3),
-(1,2);
-/*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Utiliza (idAlineacion, idEncuentro)
-values
-(1,1),
-(2,1),
-(3,1),
-(4,1),
-(6,1),
-(7,2),
-(8,2);
+(1,1,1),
+(2,1,1),
+(3,1,1),
+(4,1,1),
+(6,1,1),
+(7,2,1),
+(8,2,1);
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
 insert into Ocurrencias(idOcurrencia, nombre) values
 (1,"Tarjeta Roja"),
@@ -271,33 +241,28 @@ insert into Hacen(idIncidencia, idOcurrencia) values
 (5, 5);
 
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Notifica(idIncidencia, idOcurrencia, idEncuentro) values
-(1, 1, 1),
-(2, 2, 1),
-(3, 3, 1),
-(5, 5, 2);
+insert into Notifica(idIncidencia, idOcurrencia, idEncuentro, idDeporte) values
+(1, 1, 1,1),
+(2, 2, 1,1),
+(3, 3, 1,1),
+(5, 5, 2,1);
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into torneosIndividuales(idTorneo)values
-(1),
-(2),
-(3);
+insert into torneosIndividuales(idTorneo, idDeporte)values
+(1, 1),
+(2, 2),
+(3, 1);
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into torneosColectivos(idTorneo)values
-(4),
-(5);
-
+insert into torneosColectivos(idTorneo, idDeporte)values
+(4,1),
+(5,3);
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into torneosTienenEncuentrosIndivi(idTorneo, idEncuentro, idParticipante) values
-(2, 5, 3),
-(1, 4, 2);
-
+insert into torneosTienenEncuentrosIndivi(idTorneo,idDeporteTorneo ,idEncuentro,idDeporteEncuentro, idParticipante) values
+(2, 2, 5, 2, 5),
+(2, 2, 5, 2, 3);
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into torneosTienenEncuentrosEquipos(idTorneo, idEncuentro, idEquipo, idJugador) values
-(4, 1, 1, 10),
-(4, 1, 1, 13),
-(4, 1, 1, 8),
-(4, 1, 2, 14),
-(4, 1, 1, 9);
+insert into torneosTienenEncuentrosEquipos(idTorneo, idDeporteTorneo,idEncuentro, idDeporteEncuentro, idEquipo) values
+(4, 1, 1 ,1, 1),
+(4, 1, 1 ,1, 3);
 
 /*///////////////////////////Creacion usuarios y permisos//////////////////////////////////////////////////////////*/
 /*
