@@ -200,8 +200,9 @@ insert into Ocurrencias(idOcurrencia, nombre) values
 (2,"Tarjeta Amarilla"),
 (3,"Gol"),
 (5,"Tiro libre"),
-(6,"Expulsion"),
-(7,"Penal");
+(6,"Gana set"),
+(7,"Primer Lugar"),
+(8,"Penal");
 
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
 insert into Incidencias(IdIncidencia, minuto, idJugador)values

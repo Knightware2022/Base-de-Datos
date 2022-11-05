@@ -1,13 +1,11 @@
-#drop database KnightWareV2;
+#drop database KnightWare;
 create database KnightWareV2;
 use KnightWareV2;
-
 create table Deportes(
 	idDeporte int primary key,
     categoria varchar(50) not null,
     nombre varchar(50) not null unique
 ); 
- 
 create table Ocurrencias
 (
 	idOcurrencia int primary key,
@@ -56,7 +54,6 @@ create table Puntos
     puntos int not null default 0,
     idEquipo int not null
 );
-
 create table Jugador
 (
 	idJugador int primary key,
@@ -65,8 +62,8 @@ create table Jugador
     edad int not null,
     sexo varchar(1),
     paisNacimiento varchar(30) not null
+#	constraint cstrUnique unique(nombre, apellido)
 );
-
 create table Equipos
 (
 	idDeporte int,
