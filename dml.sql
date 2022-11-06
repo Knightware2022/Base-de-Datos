@@ -230,6 +230,10 @@ insert into torneosTienenEncuentros(idTorneo, idDeporteTorneo,idEncuentro, idDep
 (4, 1, 1 ,1, 1),
 (4, 1, 1 ,1, 3);
 
+insert into torneosTienenEncuentros(idTorneo, idDeporteTorneo,idEncuentro, idDeporteEncuentro, idEquipo) values
+(1, 1, 2 ,1, 1),
+(1, 1, 2 ,1, 3);
+
 /*///////////////////////////Creacion usuarios y permisos//////////////////////////////////////////////////////////*/
 /*
 create user 'usuarioConsultas'@'KnightWare' identified by 'consultasSQL';

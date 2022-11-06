@@ -33,3 +33,13 @@ where a.idAlineacion=u.idAlineacion AND u.idEncuentro = e.idEncuentro AND e.idEn
 
 #Equipos que practican deporte
 select e.nombre from Practican as p, Equipos as e, Deportes as d where p.idEquipo=e.idEquipo AND d.idDeporte=p.idDeporte AND d.idDeporte = "1";
+
+#Encuentros que no estan en ningun torneo
+select e.descripcionEncuentro, e.fechaComienzo 
+from Encuentros as e 
+where e.idEncuentro not in (select idEncuentro from torneosTienenEncuentros as t);
+
+#Encuentros que estan en un determinado torneo
+select e.idEncuentro, e.descripcionEncuentro 
+from Encuentros as e 
+where e.idEncuentro in (select idEncuentro from torneosTienenEncuentros as t where idTorneo=4);
