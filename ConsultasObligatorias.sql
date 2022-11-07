@@ -43,3 +43,7 @@ where e.idEncuentro not in (select idEncuentro from torneosTienenEncuentros as t
 select e.idEncuentro, e.descripcionEncuentro 
 from Encuentros as e 
 where e.idEncuentro in (select idEncuentro from torneosTienenEncuentros as t where idTorneo=4);
+
+
+
+

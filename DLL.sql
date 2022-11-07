@@ -25,21 +25,28 @@ create table Notifica
     idDeporte int,
     primary key (idIncidencia,idOcurrencia, idEncuentro)
 );
+create table Genera (
+	idResultado int,
+    idEncuentro int,
+    idDeporte int,
+    primary key (idResultado, idEncuentro, idDeporte)
+);
 create table Incidencias
 (
 	idIncidencia int,
     idJugador int,
     minuto int,
+    puntos int,
     primary key (idIncidencia)
 );
 create table Resultados
 (
-	idResultado int primary key
+	idResultado int primary key auto_increment
 );
 create table Rankings
 (
 	idResultado int primary key,
-    posicion varchar (50),
+    puntuacion int,
     idEquipo int not null
 );
 create table Particular
@@ -185,7 +192,7 @@ create table Utiliza
     idDeporte int,
     primary key(idAlineacion,idEncuentro, idDeporte)
 );
-alter table Forman add constraint rs_Unique unique(idJugador);#se debe deshablitar si se quiere que un jugador pertenezca a mas de 1 equipo 
+alter table Forman add constraint rs_Unique unique(idJugador); 
 alter table Vip add constraint uk_correo unique(correo);
 alter table Compite add constraint fk_compiteENCU foreign key (idEncuentro, idDeporteEncuentro) references Encuentros(idEncuentro, idDeporte) on delete cascade;
 alter table DeportesFavoritos add constraint fk_depoFavUSU foreign key (idUsuario) references Vip(idUsuario) on delete cascade;
@@ -231,3 +238,7 @@ alter table torneosTienenEncuentros add constraint ck_DepoColecTorn check(idDepo
 alter table Rankings add constraint fkInciRAnk foreign key(idResultado) references Resultados(idResultado);
 alter table Particular add constraint fkInciParti foreign key(idResultado) references Resultados(idResultado);
 alter table Puntos add constraint fkInciParti_par foreign key(idResultado) references Resultados(idResultado);
+
+alter table Genera add constraint fkGeneraResu foreign key(idResultado) references Resultados(idResultado);
+alter table Genera add constraint fkGeneraEve foreign key(idEncuentro, idDeporte) references Encuentros(idEncuentro, idDeporte);
+

@@ -211,6 +211,8 @@ insert into Incidencias(IdIncidencia, minuto, idJugador)values
 (3, 57, 3),
 (4, 91, 5),
 (5, 02, 4);
+
+
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
 insert into Hacen(idIncidencia, idOcurrencia) values
 (1, 1),
