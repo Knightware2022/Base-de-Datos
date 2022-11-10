@@ -8,7 +8,7 @@ AND en.idDeporte=d.idDeporte AND d.nombre = 'futbol';
 #2 nombre de los usuarios VIP
 select nombre
 from VIP;
-
+ 
 #3 nombre de usuarios que reciben notificaciones (siguen) a aguada
 Select v.idUsuario, v.Nombre, e.nombre as nombreEquipo
 from Vip as v, EquiposFavoritos as ef, Equipos as e
@@ -43,7 +43,29 @@ where e.idEncuentro not in (select idEncuentro from torneosTienenEncuentros as t
 select e.idEncuentro, e.descripcionEncuentro 
 from Encuentros as e 
 where e.idEncuentro in (select idEncuentro from torneosTienenEncuentros as t where idTorneo=4);
+select * from Genera;
 
+#Resultado con Puntos de un evento dado
+select e.nombre, e.categoria, p.puntos 
+from Equipos as e, Genera as g, Puntos as p 
+where g.idResultado=p.idResultado AND g.idEncuentro=2 AND p.idEquipo=e.idEquipo;
 
+#Resultado con Rankings
+	select e.nombre, e.categoria, r.puntuacion 
+    from Equipos as e, Genera as g, Rankings as r 
+    where g.idResultado=r.idResultado AND g.idEncuentro=2 AND r.idEquipo=e.idEquipo order by r.puntuacion desc;
 
+#Resultado con Sets
+select e.nombre, e.categoria, p.setsGanados
+ from Equipos as e, Genera as g, Particular as p
+ where g.idResultado=p.idResultado AND g.idEncuentro=2 AND p.idEquipo=e.idEquipo ;
 
+#encuentros de un torneo dado
+select e.idEncuentro, e.descripcionEncuentro, e.fechaComienzo from Torneos as t, torneosTienenEncuentros as tt, Encuentros as e where t.idTorneo = tt.idTorneo AND tt.idEncuentro=e.idEncuentro AND t.idTorneo= 8;
+select * from Torneos;
+#datos de un torneo dado
+
+#datos de un torneo dado
+select distinct t.fechaComienzo, t.fechaFinalizado, d.nombre, equi.nombre, equi.categoria 
+from Torneos as t, equipos as equi, deportes as d, torneosTienenEncuentros as tt
+where t.idTorneo=tt.idTorneo AND tt.idEquipo = equi.idEquipo AND tt.idDeporteTorneo = d.idDeporte AND t.idTorneo=35;

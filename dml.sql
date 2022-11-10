@@ -29,7 +29,7 @@ values
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
 insert into Equipos(idDeporte, idEquipo,categoria,logo,nombre,pais) /*insertar valores a la tabla equipos*/
 values
-(1, 1,'primera','http//megalovania','Peniarol','espania'),
+(1, 1,'primera','https://upload.wikimedia.org/wikipedia/commons/c/c6/Escudo-penarol-2015.png','Peniarol','espania'),
 (2, 2,'segunda','http//megalovania','real madrid','espania'),
 (1, 3,'tercera','http//megalovania','barcelona','espania'),
 (1, 4,'sub-15','http//megalovania','aguada','uruguay'),
@@ -123,6 +123,7 @@ values
 (1, 3,'2020-9-9 17:30:00','2020-12-8 22:30:00','bishop'),
 (1, 4,'1999-12-31 04:45:00','2000-1-1 10:45:00','new year walk'),
 (3, 5,'2009-1-1 06:30:00','2119-12-31 06:30:00','jo mama');
+
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
 insert into Usuarios(idUsuario)/*insertar valores a la tabla ususarios padre*/ 
 values
@@ -235,6 +236,7 @@ insert into torneosTienenEncuentros(idTorneo, idDeporteTorneo,idEncuentro, idDep
 insert into torneosTienenEncuentros(idTorneo, idDeporteTorneo,idEncuentro, idDeporteEncuentro, idEquipo) values
 (1, 1, 2 ,1, 1),
 (1, 1, 2 ,1, 3);
+
 
 /*///////////////////////////Creacion usuarios y permisos//////////////////////////////////////////////////////////*/
 /*

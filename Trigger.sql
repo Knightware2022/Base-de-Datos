@@ -6,6 +6,7 @@ BEGIN
 	if ('gol' = (select distinct o.nombre from Ocurrencias as o, hacen as h where o.idOcurrencia=h.idOcurrencia AND o.idOcurrencia = new.idOcurrencia AND h.idIncidencia=new.idIncidencia)) then 		
        if ((select count(g.idResultado) from Genera as g, puntos as p where g.idEncuentro=new.idEncuentro AND p.idResultado=g.idResultado and p.idEquipo = (select equi.idEquipo from Equipos as equi, forman as f where f.idJugador=(select idJugador from Incidencias where idIncidencia= new.idIncidencia) AND f.idEquipo=equi.idEquipo)) = 0) then
 			insert into Resultados() values ();
+			update Incidencias set puntos=1 where idIncidencia=new.idIncidencia;
             insert into Genera (idResultado, idEncuentro, idDeporte) values ((select max(idResultado) from Resultados),(new.idEncuentro), new.idDeporte);
 			insert into Puntos (idResultado, puntos, idEquipo) values ((select max(idResultado) from Resultados), (select count(o.nombre) from Ocurrencias as o, hacen as h where o.idOcurrencia=h.idOcurrencia AND o.idOcurrencia =new.idOcurrencia AND h.idIncidencia=new.idIncidencia AND o.nombre='gol'), (select equi.idEquipo from Equipos as equi, forman as f where f.idJugador=(select idJugador from Incidencias where idIncidencia= new.idIncidencia) AND f.idEquipo=equi.idEquipo) );        
 		else # ya habia hecho algun punto y figura 
@@ -15,6 +16,7 @@ BEGIN
 	elseif ('gana set' = (select distinct o.nombre from Ocurrencias as o, hacen as h where o.idOcurrencia=h.idOcurrencia AND o.idOcurrencia = new.idOcurrencia AND h.idIncidencia=new.idIncidencia)) then #si fue sets
 		if ((select count(g.idResultado) from Genera as g, Particular as p where g.idEncuentro=new.idEncuentro AND p.idResultado=g.idResultado and p.idEquipo = (select equi.idEquipo from Equipos as equi, forman as f where f.idJugador=(select idJugador from Incidencias where idIncidencia= new.idIncidencia) AND f.idEquipo=equi.idEquipo)) = 0) then
 			insert into Resultados() values ();
+            update Incidencias set puntos=0 where idIncidencia=new.idIncidencia;
             insert into Genera (idResultado, idEncuentro, idDeporte) values ((select max(idResultado) from Resultados),(new.idEncuentro), new.idDeporte);
 			insert into Particular (idResultado, setsGanados, idEquipo) values ((select max(idResultado) from Resultados), (select count(o.nombre) from Ocurrencias as o, hacen as h where o.idOcurrencia=h.idOcurrencia AND o.idOcurrencia =new.idOcurrencia AND h.idIncidencia=new.idIncidencia AND o.nombre='gana set'), (select equi.idEquipo from Equipos as equi, forman as f where f.idJugador=(select idJugador from Incidencias where idIncidencia= new.idIncidencia) AND f.idEquipo=equi.idEquipo) );        
 		else # ya habia hecho algun set y figura 
@@ -42,5 +44,4 @@ BEGIN
 	
 END;$$
 Delimiter ;
-
 #drop trigger insertarenResulados;
