@@ -73,40 +73,6 @@ values
 (7,9,'pateador'),
 (8,5,'saguero');
 /*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Resultados (idResultado) values
-(1),
-(2),
-(3),
-(4),
-(5),
-(6),
-(7),
-(8),
-(9),
-(10),
-(11);
-
-
-insert into Puntos(idResultado,idEquipo,Puntos) 
-values
-(1,1,2),
-(2,2,1),
-(3,3,78);
-/*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////*/
-insert into Particular(idResultado,setsGanados,idEquipo)
-values
-(4,1,2),
-(5,2,4),
-(6,2,3);
-
-/*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
-insert into Rankings(idResultado,posicion,idEquipo)/*insertar valores a la tabla rankings*/
-values
-(7,"primero",1),
-(8,'cuarto',2),
-(9,'utlimo',3),
-(10,'cuarto',4);
-/*'////////////////////////////////////////////////////////////////////////////////////////////////////////////////'*/
 insert into Forman(idJugador,idEquipo, idDeporteEquipo)/*insertar valores a la tabla forman*/
 values
 (9,1,1),
