@@ -44,4 +44,19 @@ BEGIN
 	
 END;$$
 Delimiter ;
-#drop trigger insertarenResulados;
+/*
+DELIMITER $$
+CREATE TRIGGER AcomodarNombreEventoTorneo
+after INSERT ON TorneosTienenEncuentros
+FOR EACH ROW
+BEGIN
+	update Encuentros set descripcionEncuentro = (select nombreTorneo from Torneos where idTorneo=new.idTorneo) + "_ " + (select descripcionEncuentro from Encuentros where idEncuentro=new.idEncuentro) where idEncuentro = new.idEncuentro;
+END;$$
+Delimiter ;
+#drop trigger AcomodarNombreEventoTorneo;
+*/
+
+
+select distinct equi.nombre
+from torneos as tor join torneostienenencuentros as torti on tor.idTorneo = torti.idTorneo join equipos as equi on torti.idEquipo = equi.idEquipo
+where tor.nombreTorneo = 'redbull';

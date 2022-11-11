@@ -153,6 +153,8 @@ create table EquiposFavoritos
     idDeporte int, 
     primary key (idUsuario,idEquipoFavorito, idDeporte)
 );
+
+
 create table DeportesFavoritos
 (
 	idUsuario int,
@@ -193,7 +195,7 @@ create table Utiliza
 );
 alter table Forman add constraint rs_Unique unique(idJugador); 
 alter table Vip add constraint uk_correo unique(correo);
-alter table Compite add constraint fk_compiteENCU foreign key (idEncuentro, idDeporteEncuentro) references Encuentros(idEncuentro, idDeporte) on delete cascade;
+alter table Compite add constraint fk_compiteENCU foreign key (idEncuentro, idDeporteEncuentro) references Encuentros(idEncuentro, idDeporte) on delete cascade on update cascade;
 alter table DeportesFavoritos add constraint fk_depoFavUSU foreign key (idUsuario) references Vip(idUsuario) on delete cascade;
 alter table DeportesFavoritos add constraint fk_depoFavDEPO foreign key (deporteFavorito) references Deportes(idDeporte) on delete cascade;
 alter table Forman add constraint fk_formanJUGA foreign key (idJugador) references Jugador(idJugador) on delete cascade;
@@ -222,12 +224,14 @@ alter table torneosTienenEncuentros add constraint ck_TorneoColeDeporEncuentro c
 alter table Forman add constraint fk_formanEQUIDepo foreign key (idDeporteEquipo, idEquipo) references Equipos(idDeporte, idEquipo);
 
 alter table Visualiza add constraint fk_visaENCU foreign key (idDeporte, idEncuentro) references Encuentros(idDeporte, idEncuentro) on delete cascade on update cascade;
-alter table Utiliza add CONSTRAINT `fk_utiliENCU` FOREIGN KEY (idDeporte, idEncuentro) REFERENCES `Encuentros` (idDeporte, idEncuentro) on delete cascade;
-alter table Notifica add CONSTRAINT `fk_notificaEncu` FOREIGN KEY (idDeporte, idEncuentro) REFERENCES `Encuentros` (idDeporte, idEncuentro) on delete cascade;
+alter table Utiliza add CONSTRAINT `fk_utiliENCU` FOREIGN KEY (idDeporte, idEncuentro) REFERENCES `Encuentros` (idDeporte, idEncuentro) on delete cascade on update cascade;
+alter table Notifica add CONSTRAINT `fk_notificaEncu` FOREIGN KEY (idDeporte, idEncuentro) REFERENCES `Encuentros` (idDeporte, idEncuentro) on delete cascade on update cascade;
+
 alter table EquiposFavoritos add constraint fk_EquipoFavUSU foreign key (idDeporte, idEquipoFavorito) references Equipos(idDeporte, idEquipo);
 alter table Compite add constraint fk_compiteJUGAEquiDepo foreign key (idJugador,idEquipo,idDeporteEquipo) references Forman(idJugador,idEquipo, idDeporteEquipo) ;
 
-alter table torneosTienenEncuentros add constraint fkTorneoColeTorn foreign key (idTorneo, idDeporteTorneo) references Torneos (idTorneo, idDeporte);
+alter table torneosTienenEncuentros add constraint fkTorneoColeTorn foreign key (idTorneo, idDeporteTorneo) references Torneos (idTorneo, idDeporte) on update cascade;
+
 alter table torneosTienenEncuentros add constraint fkTorneoColeEncu foreign key (idDeporteEncuentro, idEncuentro,idEquipo) references Compite (idDeporteEncuentro,idEncuentro, idEquipo) on delete cascade;
 alter table Encuentros add constraint ck_Fechas check(fechaFinaliza > fechaComienzo);
 alter table Torneos add constraint ck_FechasTorn check(fechaFinalizado > fechaComienzo);
@@ -239,6 +243,5 @@ alter table Particular add constraint fkInciParti foreign key(idResultado) refer
 alter table Puntos add constraint fkInciParti_par foreign key(idResultado) references Resultados(idResultado);
 
 alter table Genera add constraint fkGeneraResu foreign key(idResultado) references Resultados(idResultado);
-alter table Genera add constraint fkGeneraEve foreign key(idEncuentro, idDeporte) references Encuentros(idEncuentro, idDeporte);
+alter table Genera add constraint fkGeneraEve foreign key(idEncuentro, idDeporte) references Encuentros(idEncuentro, idDeporte) on update cascade;
 
-select * from Encuentros;
