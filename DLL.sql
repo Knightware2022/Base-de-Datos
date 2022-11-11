@@ -1,6 +1,6 @@
 #drop database KnightWare;
-create database KnightWareV2;
-use KnightWareV2;
+create database KnightWare;
+use KnightWare;
 create table Deportes(
 	idDeporte int primary key,
     categoria varchar(50) not null,

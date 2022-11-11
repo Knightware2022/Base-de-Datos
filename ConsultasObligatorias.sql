@@ -29,17 +29,8 @@ select j.nombre, j.apellido, a.Poscion, equi.Nombre as Equipo
 from Jugador as j, Alineacion as a, Encuentros as e, Utiliza as u, Equipos as equi, Forman as f
 where a.idAlineacion=u.idAlineacion AND u.idEncuentro = e.idEncuentro AND e.idEncuentro=1 AND j.idJugador=a.idJugador AND equi.idEquipo=f.idEquipo AND f.idJugador=j.idJugador ;
 
-# 7 Mostrar los maximos anotadores de cada equipo en un encuentro dado de basquetball
-select Eq.nombre#, J.nombre, J.apellido, I.puntos
-from Equipos as Eq, Compite as C, Deportes as D, Encuentros as E#, Notifica as N, Jugador as J, Incidencias as I
-where D.nombre = 'basquetbol'
-and D.idDeporte = C.idDeporteEncuentro
-and Eq.idEquipo = C.idEquipo
-#and E.idEncuentro = C.idEncuentro
-#and I.idIncidencia = N.idIncidencia
-and E.idEncuentro = 5; 
-#and I.idJugador = (select I.idJugador where I.puntos = max(puntos));
-#group by J.idJugador; 
+# 7 Mostrar los maximos anotadores de cada equipo en un encuentro dado de basquetball (supongo que encuentro es 2)
+
 
 #8 Los ultimos 5 resultados de un evento dado (optamos por un evento con sistema de puntuacion de "Puntos" y el quipo aguada)
 
